@@ -9,7 +9,7 @@
 ## How to Use
 
 ### 1. Add the Script to the Question
-- Go to the **"Look & Feel"** or the **JavaScript editor** of a specific question in Qualtrics.
+- Go to the **JavaScript editor** in the **"Question behavior"** of a specific question in Qualtrics.
 - Paste the entire contents of `key_tracking.js` into the JavaScript section of that question.
 
 ### 2. Tracking Details
