@@ -3,11 +3,9 @@
 * Description       : This file contains JavaScript code to track key usage
 *                     on short response questions on Qualtrics.
 *                    
-* Revision History  :
+* Revision History  : [Redacted for peer review]
 * Date				Author    		Comments
 * ---------------------------------------------------------------------------
-* 03/01/2025		Michael Asher	Created.
-* 04/01/2025		Eason Chen	    Edited code.
 /******************************************************************/
 
 Qualtrics.SurveyEngine.addOnload(function () {
