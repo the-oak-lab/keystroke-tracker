@@ -11,19 +11,30 @@
 * 03/01/2025		Michael Asher	 Created.
 * 04/01/2025		Eason Chen	     Edited code.
 * 11/27/2025        Michael Asher    Commented code. 
+* 02/06/2026        Michael Asher    Updated code for easier sharing. 
 /******************************************************************/
 
 // Execute when the Qualtrics survey question loads
 Qualtrics.SurveyEngine.addOnload(function () {
-    let keyPressCounter = 0;  // Counts total number of key presses
-    let pasteCounter = 0;     // Counts number of paste operations
-    let copyCounter = 0;      // Counts number of copy operations
 
-    // Store this question's container element for later use
-    const questionElement = this.getQuestionContainer();
+    // Change this to match your page (e.g., "page1", "page2", "demographics", etc.)
+    var PAGE_ID = "page1";
+	
+    // List all text field variable names for this page
+    var QUESTION_NAMES = ["part_1_q1", "part_1_q2"];
     
-    // Array to store the sequence of all keystrokes and actions (paste/copy)
-    let keystroke_order = [];
+    var keyPressCounter = 0;  // Counts total number of key presses
+    var pasteCounter = 0;     // Counts number of paste operations
+    var copyCounter = 0;      // Counts number of copy operations
+
+    var questionElement = this.getQuestionContainer();
+    var keystroke_order = [];
+
+    // Store metadata about which text fields are being tracked
+    Qualtrics.SurveyEngine.setEmbeddedData(
+        'kt_qnames_' + PAGE_ID, 
+        JSON.stringify(QUESTION_NAMES)
+    );
 
     // Prevent users from accessing browser's right-click menu
     questionElement.addEventListener('contextmenu', function (e) {
@@ -36,46 +47,33 @@ Qualtrics.SurveyEngine.addOnload(function () {
     questionElement.style.msUserSelect = "none";
 
     // ========== Event Listener Functions ==========
-    // Store listeners as global window properties to enable proper cleanup
     
-    // Function to count and store keystrokes
     window._trackKeyPress = function (e) {
-        keyPressCounter++; // Increment key press count
-        keystroke_order.push(e.key); // Record which key was pressed
+        keyPressCounter++;
+        keystroke_order.push(e.key);
         
-        // Store count in Qualtrics embedded data
-        Qualtrics.SurveyEngine.setEmbeddedData("key_press_counter_question1", keyPressCounter);
-        
-        // Store complete keystroke sequence as JSON string in embedded data
-        Qualtrics.SurveyEngine.setEmbeddedData("keystroke_order_question1", JSON.stringify(keystroke_order));
-        console.log(keystroke_order);  // Debug: log current keystroke sequence
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_keypresses_' + PAGE_ID, keyPressCounter);
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_order_' + PAGE_ID, JSON.stringify(keystroke_order));
+        console.log(keystroke_order);
     };
 
-    // Function to count paste events
     window._trackPaste = function (e) {
-        pasteCounter++;  // Increment paste count
-        keystroke_order.push("paste");  // Add "paste" marker to sequence
+        pasteCounter++;
+        keystroke_order.push("paste");
         
-        // Store paste count in Qualtrics embedded data
-        Qualtrics.SurveyEngine.setEmbeddedData("paste_counter_question1", pasteCounter);
-        // Update keystroke sequence with paste event
-        Qualtrics.SurveyEngine.setEmbeddedData("keystroke_order_question1", JSON.stringify(keystroke_order));
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_pastes_' + PAGE_ID, pasteCounter);
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_order_' + PAGE_ID, JSON.stringify(keystroke_order));
     };
 
-    // Function to count copy events
     window._trackCopy = function (e) {
-        copyCounter++;  // Increment copy count
-        keystroke_order.push("copy");  // Add "copy" marker to sequence
+        copyCounter++;
+        keystroke_order.push("copy");
         
-        // Store copy count in Qualtrics embedded data
-        Qualtrics.SurveyEngine.setEmbeddedData("copy_counter_question1", copyCounter);
-        // Update keystroke sequence with copy event
-        Qualtrics.SurveyEngine.setEmbeddedData("keystroke_order_question1", JSON.stringify(keystroke_order));
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_copies_' + PAGE_ID, copyCounter);
+        Qualtrics.SurveyEngine.setEmbeddedData('kt_order_' + PAGE_ID, JSON.stringify(keystroke_order));
     };
 
     // ========== Clean Up Any Existing Listeners ==========
-    // Remove listeners from previous questions to prevent duplicate tracking
-    // This is important if a version of this script is being run on multiple pages of a Qualtrics survey
     document.removeEventListener("keyup", window._trackKeyPress);
     document.removeEventListener("copy", window._trackCopy);
     document.querySelectorAll("input[type='text'], textarea").forEach(input => {
@@ -83,21 +81,13 @@ Qualtrics.SurveyEngine.addOnload(function () {
     });
 
     // ========== Attach Fresh Event Listeners ==========
-    
-    // Listen for all keyboard activity throughout the page
     document.addEventListener("keyup", window._trackKeyPress);
-    
-    // Track copy operations on the entire document
     document.addEventListener("copy", window._trackCopy);
-    
-    // Track paste operations specifically on text input fields and textareas
     document.querySelectorAll("input[type='text'], textarea").forEach(input => {
         input.addEventListener("paste", window._trackPaste);
     });
 
     // ========== Cleanup When Moving to Next Question ==========
-    // Remove all event listeners when user clicks the Next button
-    // This prevents tracking from continuing on subsequent pages
     document.querySelector("#NextButton").onclick = function () {
         document.removeEventListener("keyup", window._trackKeyPress);
         document.removeEventListener("copy", window._trackCopy);
@@ -108,10 +98,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 });
 
 // ========== Backup Cleanup Handler ==========
-// Execute when the question is unloaded (page navigation, browser back button, etc.)
-// Provides a safety net in case the Next button cleanup doesn't fire
 Qualtrics.SurveyEngine.addOnUnload(function () {
-    // Backup cleanup in case Next button removal doesn't fire
     document.removeEventListener("keyup", window._trackKeyPress);
     document.removeEventListener("copy", window._trackCopy);
     document.querySelectorAll("input[type='text'], textarea").forEach(input => {
