@@ -31,12 +31,12 @@ This code will track keystrokes and copy/paste behavior on page in Qualtrics, ac
 - Here is what theis should look like (in this example the `PAGE_ID` is "page1", the default):  <img width="1099" height="310" alt="image" src="https://github.com/user-attachments/assets/ba81f214-be3d-49e5-ba2d-c1dc8335fc04" />
 - We recommend duplicating the five fields and updating the page identifier if you are tracking multiple pages. 
 
-**You Can Copy and Paste These Embedded Data Fields into the Survey Flow**
-kt_qnames_[PAGE_ID]
-kt_keypresses_[PAGE_ID]
-kt_pastes_[PAGE_ID]
-kt_copies_[PAGE_ID]
-kt_order_[PAGE_ID]
+**You Can Copy and Paste These Embedded Data Fields into the Survey Flow**  
+kt_qnames_[PAGE_ID]  
+kt_keypresses_[PAGE_ID]  
+kt_pastes_[PAGE_ID]  
+kt_copies_[PAGE_ID]  
+kt_order_[PAGE_ID]  
 
 ## Additonal Features
 
