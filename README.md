@@ -2,7 +2,7 @@
 
 **Code to Track Keystrokes on Short Response Questions in Qualtrics**  
 **File:** `key_tracking.js`  
-**Developed by:** [Redacted for peer review]
+**Developed by:** Michael Asher, Eason Chen, and Gillian Gold
 
 ---
 
