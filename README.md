@@ -32,11 +32,11 @@ This code will track keystrokes and copy/paste behavior on page in Qualtrics, ac
 - We recommend duplicating the five fields and updating the page identifier if you are tracking multiple pages. 
 
 **You Can Copy and Paste These Embedded Data Fields into the Survey Flow**  
-kt_qnames_[PAGE_ID]  
-kt_keypresses_[PAGE_ID]  
-kt_pastes_[PAGE_ID]  
-kt_copies_[PAGE_ID]  
-kt_order_[PAGE_ID]  
+kt_qnames_pagex  
+kt_keypresses_pagex  
+kt_pastes_pagex  
+kt_copies_pagex  
+kt_order_pagex  
 
 ## Additonal Features
 
