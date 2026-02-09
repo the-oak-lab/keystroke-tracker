@@ -1,5 +1,4 @@
 # AI Detection for Online Studies
-**File:** `key_tracking.js`  
 **Developed by:** Michael Asher, Eason Chen, and Gillian Gold
 
 ---
@@ -7,6 +6,8 @@
 This repository contains a behavioral tracking system for Qualtrics surveys. This tool provides empirical evidence of outsourced resonding by tracking real-time keystrokes, paste events, and text-entry sequences.
 
 By comparing the final character length of a response to the number of keys actually pressed, researchers can objectively identify participants who pasted externally generated text (e.g., from ChatGPT).
+
+If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152459261424723)
 
 ## How It Works
 1.  **Header Engine:** A "stateless" JavaScript engine runs in the background of your survey.
