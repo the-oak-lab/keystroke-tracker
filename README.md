@@ -27,7 +27,9 @@ Before adding any code, go to your **Survey Flow** and add an **Embedded Data** 
 
 
 ### 2. The Header Script
-Go to **Look & Feel > General > Header > Edit > Source**. Paste the following code:
+Go to **Look & Feel > General > Header > Edit > Source**. 
+
+Paste the following code:
 
 ```html
 <script>
@@ -84,6 +86,7 @@ window.trackQuestion = function(context) {
 };
 </script>
 ```
+<img width="900" height="616" alt="image" src="https://github.com/user-attachments/assets/7a67b21d-1c6a-4813-a2f3-202330a1e72e" />
 
 ### 3. Question Logic
 
@@ -94,6 +97,8 @@ Qualtrics.SurveyEngine.addOnReady(function() {
     if (window.trackQuestion) window.trackQuestion(this);
 });
 ```
+<img width="1054" height="626" alt="image" src="https://github.com/user-attachments/assets/8b29a7a5-26b2-403a-a1b9-0623b1e04498" />
+
 ### 4. Data Analysis: Flagging Suspicious Responses
 
 After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script `flagging_cheaters.R` in this repository to flag participants who may have outsourced their responses.
