@@ -1,64 +1,98 @@
 # AI Detection for Online Studies
-
-**Code to Track Keystrokes on Short Response Questions in Qualtrics**  
 **File:** `key_tracking.js`  
 **Developed by:** Michael Asher, Eason Chen, and Gillian Gold
 
 ---
 
-This code will track keystrokes and copy/paste behavior on a page in Qualtrics, across all questions on that page.
+This repository contains a behavioral tracking system for Qualtrics surveys. This tool provides empirical evidence of outsourced resonding by tracking real-time keystrokes, paste events, and text-entry sequences.
 
-## How to Use if You are Only Tracking One Page
+By comparing the final character length of a response to the number of keys actually pressed, researchers can objectively identify participants who pasted externally generated text (e.g., from ChatGPT).
 
-### 1. Add the Script to a Question on a Page That You Want to Track, and Update Variable Names
-- Go to the **JavaScript editor** in the **"Question behavior"** of one question on the page in Qualtrics.
-- Paste the entire contents of `key_tracking.js` into the JavaScript section of that question.
-- Update the `QUESTION_NAMES` array in the JavaScript code to match the names of the Qualtrics questions you are tracking (highlighted with red boxes below):
-- <img width="629" alt="image" src="https://github.com/user-attachments/assets/f407167e-dc8c-4149-bfc8-5c0823628d81" />  
-- This is what the code should look like to match the example:
-- <img width="629" height="213" alt="image" src="https://github.com/user-attachments/assets/baab6f38-d060-4bcd-a73e-a16c37f2f3fb" />
+## How It Works
+1.  **Header Engine:** A "stateless" JavaScript engine runs in the background of your survey.
+2.  **Question Snippets:** Small listeners attached to specific questions report activity to the engine.
+3.  **JSON Logging:** All behavior is bundled into a single hidden Qualtrics field called `keystroke_log`.
+4.  **R Analysis:** A script parses the JSON, maps question IDs to your dataset, and flags suspicious responses.
 
-### 2. Add Embedded Data Fields to Your Survey Flow to Hold Tracked Data
-- Here is what they should look like (in this example the `PAGE_ID` is "page1", the default):  <img width="1099" height="310" alt="image" src="https://github.com/user-attachments/assets/ba81f214-be3d-49e5-ba2d-c1dc8335fc04" />
+---
 
-**You Can Copy and Paste These Embedded Data Fields into the Survey Flow**  
-kt_qnames_page1  
-kt_keypresses_page1  
-kt_pastes_page1  
-kt_copies_page1  
-kt_order_page1  
+## Setup Instructions
+
+### 1. Survey Flow
+Before adding any code, go to your **Survey Flow** and add an **Embedded Data** element at the very top.
+* Add a field named `keystroke_log`.
+* Leave the value blank.
+* <img width="464" height="80" alt="image" src="https://github.com/user-attachments/assets/bec7c6db-498b-497c-9eb3-33eafe3ccc74" />
 
 
-# How to Use if You are Tracking More Than One Page
+### 2. The Header Script
+Go to **Look & Feel > General > Header > Edit > Source**. Paste the following code:
 
-### 2. Repeat Step 1 for Any Other Pages That You Want to Track, Updating Variable Names
-- For additional pages, update the `PAGE_ID` in the javascript file (e.g., "page2", "page3", etc.) so it does not conflict with the first page.
-- It remains **mandatory** to update the `QUESTION_NAMES` array to match the names of the text entry questons on the relevant page.
+```html
+<script>
+window.trackQuestion = function(context) {
+    const qid = context.questionId;
+    const container = context.getQuestionContainer();
+    const input = container.querySelector('textarea, input[type="text"]');
+    if (!input) return;
 
-### 3. Add Embedded Data Fields
-- For each page that you track, add five embedded data fields to your survey flow. The end of each name must match the the `PAGE_ID` that you assigned in javascript (which is "page1" by default)
-- Use these names:
-    - kt_qnames_[PAGE_ID]: This stores the names of the questions on the relevant page.
-    - kt_keypresses_[PAGE_ID]: The number of key presses on the page.
-    - kt_pastes_[PAGE_ID]: Number of paste events
-    - kt_copies_[PAGE_ID]: Number of copy events
-    - kt_order_[PAGE_ID]: Ordered list of all keystrokes and paste/copy actions
-- Here is what theis should look like (in this example the `PAGE_ID` is "page1", the default):  <img width="1099" height="310" alt="image" src="https://github.com/user-attachments/assets/ba81f214-be3d-49e5-ba2d-c1dc8335fc04" />
-- We recommend duplicating the five fields and updating the page identifier if you are tracking multiple pages. 
+    let qData = { 
+        keypresses: 0, 
+        pastes: 0, 
+        copies: 0, 
+        keystroke_order: [] 
+    };
 
-**You Can Copy and Paste These Embedded Data Fields into the Survey Flow**  
-kt_qnames_page1  
-kt_keypresses_page1  
-kt_pastes_page1  
-kt_copies_page1  
-kt_order_page1  
+    input.addEventListener('keyup', (e) => { 
+        qData.keypresses++; 
+        qData.keystroke_order.push(e.key); 
+    });
+    input.addEventListener('paste', () => { 
+        qData.pastes++; 
+        qData.keystroke_order.push("paste"); 
+    });
+    input.addEventListener('copy', () => { 
+        qData.copies++; 
+        qData.keystroke_order.push("copy"); 
+    });
 
-## Additonal Features
+    Qualtrics.SurveyEngine.addOnPageSubmit(function() {
+        let questionRecord = {
+            qid: qid,
+            keypresses: qData.keypresses,
+            pastes: qData.pastes,
+            copies: qData.copies,
+            keystroke_order: qData.keystroke_order,
+            text: input.value
+        };
 
-### 1. Interaction Control
+        let raw = Qualtrics.SurveyEngine.getEmbeddedData('keystroke_log');
+        let master = { data: [] };
+        try { 
+            if (raw && raw.trim() !== "") {
+                master = JSON.parse(raw);
+            }
+        } catch(e) { 
+            master = { data: [] }; 
+        }
 
-- By default right-clicking and text selection are disabled to reduce the risk of copying and pasting from external sources.
+        master.data.push(questionRecord);
+        
+        Qualtrics.SurveyEngine.setEmbeddedData('keystroke_log', JSON.stringify(master));
+    });
+};
+</script>
+```
 
-### 2. Automatic Cleanup
+### 3. Question Logic
 
-- Event listeners are automatically removed when the respondent clicks the **Next** button or navigates away from the page. This prevents data duplication and avoids interference with other survey elements.
+For every question you wish to track, click the JavaScript icon on the question and add this to the addOnReady section:
+
+```JavaScript
+Qualtrics.SurveyEngine.addOnReady(function() {
+    if (window.trackQuestion) window.trackQuestion(this);
+});
+```
+### 4. Data Analysis: Flagging Suspicious Responses
+
+After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script `flagging_participants.R` in this repository to flag participants who may have outsourced their responses.
