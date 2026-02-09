@@ -8,8 +8,8 @@ library(jsonlite)
 # Put the file path to your Qualtrics data here:
 data_file <- "[YOUR_FILE_PATH_HERE]"
 
-# Put the name of your preferred ID column here (e.g., PROLIFIC_PID)
-# The default, ResponseId, should work for your Qualtrics data but may not be
+# Put the name of your preferred ID column here (e.g., "PROLIFIC_PID")
+# The default, "ResponseId", should work with your Qualtrics data but may not be
 # your preferred identifier.
 id_name <- "ResponseId"
 
@@ -43,7 +43,7 @@ keystroke_question_data <- data %>%
   ungroup() %>%
   select(all_of(id_name), qid, export_id, everything())
 
-# Participants to be manually reviewed
+# Pulling participants to be manually reviewed
 possible_cheaters <- keystroke_question_data %>%
   group_by(ResponseId) %>% 
   mutate(n_with_pastes = sum(pasted > 0),
