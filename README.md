@@ -3,17 +3,15 @@
 
 ---
 
-This repository contains a behavioral tracking system for Qualtrics surveys. This tool provides empirical evidence of outsourced resonding by tracking real-time keystrokes, paste events, and text-entry sequences.
-
-By comparing the final character length of a response to the number of keys actually pressed, researchers can objectively identify participants who pasted externally generated text (e.g., from ChatGPT).
+This repository contains a keystroke tracking system for Qualtrics surveys. This tool can provide empirical evidence of outsourced resonding (namely, AI use) by tracking participants' keystrokes and paste events. By examining paste events and comparing the final character length of a response to the number of keys actually pressed, researchers can objectively identify participants who pasted externally generated text (e.g., from ChatGPT).
 
 If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152459261424723)
 
 ## How It Works
-1.  **Header Engine:** A "stateless" JavaScript engine runs in the background of your survey.
-2.  **Question Snippets:** Small listeners attached to specific questions report activity to the engine.
-3.  **JSON Logging:** All behavior is bundled into a single hidden Qualtrics field called `keystroke_log`.
-4.  **R Analysis:** A script parses the JSON, maps question IDs to your dataset, and flags suspicious responses.
+1.  **A Tracking Function (Header):** A script placed in the survey header that prepares Qualtrics to record keystroke data.
+2.  **A Question Listener (JS Snippet):** A short command added to individual text questions to enable tracking for that specific input box.
+3.  **JSON Logging:** Keystroke counts, paste events, and final text are automatically bundled into a single embedded data JSON field called `keystroke_log`.
+4.  **R Analysis:** A script parses the JSON, and identifies responses that were likely AI-generated.
 
 ---
 
