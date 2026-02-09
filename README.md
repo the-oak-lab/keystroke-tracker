@@ -10,7 +10,7 @@ If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152
 ## How It Works
 1.  **A Tracking Function (Header):** A script placed in the survey header that prepares Qualtrics to record keystroke data.
 2.  **A Question Listener (JS Snippet):** A short command added to individual text questions to enable tracking for that specific input box.
-3.  **JSON Logging:** Keystroke counts, paste events, and final text are automatically bundled into a single embedded data JSON field called `keystroke_log`.
+3.  **JSON Logging:** Keystrokes, keystroke counts, paste events, and final text are automatically bundled into a single embedded data JSON field called `keystroke_log`.
 4.  **R Analysis:** A script parses the JSON and identifies responses that were likely AI-generated.
 
 ---
@@ -99,4 +99,4 @@ Qualtrics.SurveyEngine.addOnReady(function() {
 
 ### 4. Data Analysis: Flagging Suspicious Responses
 
-After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script `flagging_cheaters.R` in this repository to flag participants who may have outsourced their responses.
+After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script [`flagging_cheaters.R`](https://github.com/the-oak-lab/keystroke-tracker/blob/main/flagging_cheaters.R) in this repository to flag participants who may have outsourced their responses.
