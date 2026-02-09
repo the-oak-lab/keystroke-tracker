@@ -95,4 +95,4 @@ Qualtrics.SurveyEngine.addOnReady(function() {
 ```
 ### 4. Data Analysis: Flagging Suspicious Responses
 
-After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script `flagging_participants.R` in this repository to flag participants who may have outsourced their responses.
+After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script `flagging_cheaters.R` in this repository to flag participants who may have outsourced their responses.
