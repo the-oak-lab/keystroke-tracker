@@ -45,11 +45,11 @@ keystroke_question_data <- data %>%
 
 # Pulling participants to be manually reviewed
 possible_cheaters <- keystroke_question_data %>%
-  group_by(ResponseId) %>% 
+  group_by(all_of(id_name)) %>% 
   mutate(n_with_pastes = sum(pasted > 0),
          n_too_short = sum(too_short)) %>%
   filter(n_with_pastes > 0, n_too_short > 0) %>%
-  select(ResponseId, qid, export_id, n_with_pastes, n_too_short, everything())
+  select(all_of(id_name), qid, export_id, n_with_pastes, n_too_short, everything())
 
 
 
