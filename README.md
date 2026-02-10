@@ -15,7 +15,7 @@ If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152
 
 ---
 
-## Setup Instructions
+## Setup Instructions [(YouTube Tutorial Here)](https://www.youtube.com/watch?v=AosGYlN1b1Q)
 
 ### 1. Survey Flow
 Before adding any code, go to your **Survey Flow** and add an **Embedded Data** element at the very top.
@@ -96,6 +96,10 @@ Qualtrics.SurveyEngine.addOnReady(function() {
 });
 ```
 <img width="1054" height="626" alt="image" src="https://github.com/user-attachments/assets/8b29a7a5-26b2-403a-a1b9-0623b1e04498" />
+
+### 3b. Publish Your Survey
+
+You have now added all of the necessary code to track keystrokes for your study, but it will not be added to the live version of your survey unless you click "Publish" on Qualtrics. Don't forget this step!
 
 ### 4. Data Analysis: Flagging Suspicious Responses
 
