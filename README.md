@@ -15,7 +15,7 @@ If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152
 
 ---
 
-## Setup Instructions [(YouTube Tutorial Here)](https://www.youtube.com/watch?v=AosGYlN1b1Q)
+## Setup Instructions <a href="https://www.youtube.com/watch?v=AosGYlN1b1Q" target="_blank">(Youtube Tutorial Here)</a>
 
 ### 1. Survey Flow
 Before adding any code, go to your **Survey Flow** and add an **Embedded Data** element at the very top.
