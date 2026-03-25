@@ -104,3 +104,6 @@ You have now added all of the necessary code to track keystrokes for your study,
 ### 4. Data Analysis: Flagging Suspicious Responses
 
 After exporting your data from qualtrics as a CSV (with Numeric Values), use the R script [`flagging_cheaters.R`](https://github.com/the-oak-lab/keystroke-tracker/blob/main/flagging_cheaters.R) in this repository to flag participants who may have outsourced their responses.
+
+If you prefer not to write code, you can use this interactive web application to screen for cheaters in your data: https://the-oak-lab.github.io/keystroke-viz/
+
