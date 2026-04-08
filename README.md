@@ -5,7 +5,17 @@
 
 This repository contains a keystroke tracking system for Qualtrics surveys. This tool can provide empirical evidence of outsourced resonding (namely, AI use) by tracking participants' keystrokes and paste events. By examining paste events and comparing the final character length of a response to the number of keys actually pressed, researchers can objectively identify participants who pasted externally generated text (e.g., from ChatGPT).
 
-If you use this tool, please cite Asher et al., 2026 (article DOI: 10.1177/25152459261424723)
+In a three-study evaluation of this tool on Prolific (N = 928), the tool conclusively showed that 10% of our participants were outsourcing their open-ended responses to tools like ChatGPT. Read the article, published in AMPPS, [here](https://doi.org/10.1177/25152459261424723).
+
+## Citation
+
+If you use this tool, please cite:
+```
+Asher, M. W., Gold, G., Chen, E., & Carvalho, P. F. (2026). Chatbots Are Undermining
+Crowdsourced Research in the Behavioral Sciences: Detecting Artificial Intelligence–Assisted
+Cheating With a Keystroke-Based Tool. Advances in Methods and Practices in Psychological
+Science, 9(1), 25152459261424723. https://doi.org/10.1177/25152459261424723
+```
 
 ## How It Works
 1.  **A Tracking Function (Header):** A script placed in the survey header that prepares Qualtrics to record keystroke data.
