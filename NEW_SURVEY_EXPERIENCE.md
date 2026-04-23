@@ -31,11 +31,10 @@ Science, 9(1), 25152459261424723. https://doi.org/10.1177/25152459261424723
 ## Setup Instructions
 
 ### 1. Survey Flow
-Before adding any code, go to your **Survey Flow** and add an **Embedded Data** element.
+Before adding any code, go to your **Survey Flow** and add an **Embedded Data** element at the top.
 
 * Add a field named `__js_keystroke_log`
 * Leave the value blank
-* Place it **after** your question block — not before
 
 > ⚠️ The `__js_` prefix is required by the new Qualtrics experience to allow JavaScript to write to embedded data fields.
 
