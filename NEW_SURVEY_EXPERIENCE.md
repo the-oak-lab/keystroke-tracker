@@ -1,4 +1,4 @@
-# AI Detection for Online Studies — New Survey Experience
+# AI Detection for Online Studies — For Qualtrics "New Survey Taking Experience"
 
 > ⚠️ This guide is for users who have enabled the **New Qualtrics Survey Taking Experience**. Looking for the standard setup? See the [main setup guide](README.md) instead.
 
