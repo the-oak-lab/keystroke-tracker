@@ -17,6 +17,15 @@ Cheating With a Keystroke-Based Tool. Advances in Methods and Practices in Psych
 Science, 9(1), 25152459261424723. https://doi.org/10.1177/25152459261424723
 ```
 
+## Compatibility With Qualtrics "New Survey Taking Experience"
+
+Qualtrics is rolling out a **"New Survey Taking Experience**. Check which version you're using:
+- **Survey Options > General** — if you see a "New Survey Taking Experience" toggle, check if it's enabled
+- If disabled (our recommendation for now) → follow the **Standard** instructions below
+- ⚠️ **Using the New Qualtrics Survey Experience?** See the [New Survey Experience setup guide](NEW_SURVEY_EXPERIENCE.md) instead.
+
+---
+
 ## How It Works
 1.  **A Tracking Function (Header):** A script placed in the survey header that prepares Qualtrics to record keystroke data.
 2.  **A Question Listener (JS Snippet):** A short command added to individual text questions to enable tracking for that specific input box.
