@@ -36,7 +36,7 @@ Before adding any code, go to your **Survey Flow** and add an **Embedded Data** 
 * Add a field named `__js_keystroke_log`
 * Leave the value blank
 
-> ⚠️ The `__js_` prefix is required by the new Qualtrics experience to allow JavaScript to write to embedded data fields.
+> ⚠️ The `__js_` prefix (with two underscores + "js" + one underscore) is required by the new Qualtrics experience to allow JavaScript to write to embedded data fields.
 
 ### 2. The Header Script
 Go to **Look & Feel > General > Header > Edit > Source**.
