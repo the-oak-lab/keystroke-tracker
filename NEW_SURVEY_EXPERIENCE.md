@@ -43,6 +43,8 @@ Go to **Look & Feel > General > Header > Edit > Source**.
 
 Paste the following code:
 
+> ⚠️ The new survey experience uses the commands `getJSEmbeddedData` and `setJSEmbeddedData` rather than `getEmbeddedData` and `setEmbeddedData`.
+
 ```html
 <script>
 window.trackQuestion = function(context) {
