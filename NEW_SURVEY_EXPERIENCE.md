@@ -1,6 +1,8 @@
 # AI Detection for Online Studies — For Qualtrics "New Survey Taking Experience"
 
-> ⚠️ This guide is for users who have enabled the **New Qualtrics Survey Taking Experience**. Looking for the standard setup? See the [main setup guide](README.md) instead.
+> ⚠️ This guide is for users who are using the **New Qualtrics Survey Taking Experience** (the default for surveys created after June 2026). Looking for the legacy setup? See the [main setup guide](README.md) instead.
+
+<img width="1042" height="660" alt="image" src="https://github.com/user-attachments/assets/3a827217-8c29-4194-b458-f2137b5101fb" />
 
 **Developed by:** Michael Asher, Eason Chen, and Gillian Gold
 
