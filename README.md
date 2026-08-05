@@ -24,6 +24,8 @@ Qualtrics is rolling out a **"New Survey Taking Experience**. Check which versio
 - If disabled (our recommendation for now) → follow the **Standard** instructions below
 - ⚠️ **Using the New Qualtrics Survey Experience?** See the [New Survey Experience setup guide](NEW_SURVEY_EXPERIENCE.md) instead.
 
+<img width="1017" height="632" alt="image" src="https://github.com/user-attachments/assets/d193ee8a-9d54-4c09-ac0c-f3091578f40a" />
+
 ---
 
 ## How It Works
