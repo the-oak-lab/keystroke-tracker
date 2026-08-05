@@ -21,7 +21,7 @@ Science, 9(1), 25152459261424723. https://doi.org/10.1177/25152459261424723
 
 Qualtrics is rolling out a **"New Survey Taking Experience**. Check which version you're using:
 - **Survey Options > General** — if you see a "New Survey Taking Experience" toggle, check if it's enabled
-- If disabled (our recommendation for now) → follow the **Standard** instructions below
+- If disabled → follow the **Standard** instructions below
 - ⚠️ **Using the New Qualtrics Survey Experience?** See the [New Survey Experience setup guide](NEW_SURVEY_EXPERIENCE.md) instead.
 
 <img width="1017" height="632" alt="image" src="https://github.com/user-attachments/assets/d193ee8a-9d54-4c09-ac0c-f3091578f40a" />
